@@ -48,6 +48,18 @@ int main(int argc, char* argv[]) {
   // done as early as possible.
   Debug::instance();
 
+#ifdef Q_OS_LINUX
+  // Only force offscreen rendering if there's truly no display available
+  // and the user hasn't picked a platform themselves. This keeps existing
+  // setups working (e.g. CI running under xvfb-run) and only kicks in for
+  // genuinely headless environments.
+  if (qEnvironmentVariableIsEmpty("QT_QPA_PLATFORM") &&
+      qEnvironmentVariableIsEmpty("DISPLAY") &&
+      qEnvironmentVariableIsEmpty("WAYLAND_DISPLAY")) {
+    qputenv("QT_QPA_PLATFORM", "offscreen");
+  }
+#endif
+
   // Silence logging output, it's a command line tool where logging messages
   // could lead to issues when parsing the CLI output. Real errors will be
   // printed to stderr explicitly and logging output can optionally be enabled
