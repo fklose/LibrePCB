@@ -1,3 +1,9 @@
+# Ignore subsequent calls (https://github.com/LibrePCB/LibrePCB/issues/1812)
+if(TARGET gtest)
+  return()
+endif()
+
+# Find bundled submodule
 set(GTEST_SUBMODULE_BASEPATH "${PROJECT_SOURCE_DIR}/libs/googletest")
 if(EXISTS "${GTEST_SUBMODULE_BASEPATH}"
    AND NOT UNBUNDLE_GTEST
@@ -16,13 +22,13 @@ if(EXISTS "${GTEST_SUBMODULE_BASEPATH}"
   add_library(GTest::GMock ALIAS gmock)
 
   # Stop here, we're done
+  set(GTest_FOUND TRUE)
   return()
 endif()
 
 # Otherwise, try to find shared library on the system
 # Note: GMock might be contained within the GTest package, so we don't fail
 #       if the GMock package was not found. We just try to create the alias.
-
 find_package(GTest CONFIG)
 find_package(GMock CONFIG)
 if(GTest_FOUND)

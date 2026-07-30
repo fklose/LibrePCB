@@ -1,3 +1,9 @@
+# Ignore subsequent calls (https://github.com/LibrePCB/LibrePCB/issues/1812)
+if(TARGET dxflib)
+  return()
+endif()
+
+# Find bundled submodule
 set(DXFLIB_SUBMODULE_BASEPATH "${PROJECT_SOURCE_DIR}/libs/dxflib")
 if(EXISTS "${DXFLIB_SUBMODULE_BASEPATH}"
    AND NOT UNBUNDLE_DXFLIB
@@ -15,6 +21,7 @@ if(EXISTS "${DXFLIB_SUBMODULE_BASEPATH}"
   target_compile_options(dxflib PRIVATE -Wno-deprecated-declarations)
 
   # Stop here, we're done
+  set(Dxflib_FOUND TRUE)
   return()
 endif()
 

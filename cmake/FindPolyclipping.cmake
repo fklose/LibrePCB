@@ -1,3 +1,9 @@
+# Ignore subsequent calls (https://github.com/LibrePCB/LibrePCB/issues/1812)
+if(TARGET polyclipping)
+  return()
+endif()
+
+# Find bundled submodule
 set(POLYCLIPPING_SUBMODULE_BASEPATH "${PROJECT_SOURCE_DIR}/libs/polyclipping")
 if(EXISTS "${POLYCLIPPING_SUBMODULE_BASEPATH}"
    AND NOT UNBUNDLE_POLYCLIPPING
@@ -12,6 +18,7 @@ if(EXISTS "${POLYCLIPPING_SUBMODULE_BASEPATH}"
   )
 
   # Stop here, we're done
+  set(Polyclipping_FOUND TRUE)
   return()
 endif()
 
@@ -27,5 +34,3 @@ if(Polyclipping_FOUND)
 endif()
 
 message(FATAL_ERROR "Did not find Polyclipping system library via pkg-config")
-
-# Here we could search for the library manually, using find_path etc

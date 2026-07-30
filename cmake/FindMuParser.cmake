@@ -1,3 +1,9 @@
+# Ignore subsequent calls (https://github.com/LibrePCB/LibrePCB/issues/1812)
+if(TARGET muparser)
+  return()
+endif()
+
+# Find bundled submodule
 set(MUPARSER_SUBMODULE_BASEPATH "${PROJECT_SOURCE_DIR}/libs/muparser")
 if(EXISTS "${MUPARSER_SUBMODULE_BASEPATH}"
    AND NOT UNBUNDLE_MUPARSER
@@ -35,6 +41,7 @@ if(EXISTS "${MUPARSER_SUBMODULE_BASEPATH}"
   add_library(MuParser::MuParser ALIAS muparser)
 
   # Stop here, we're done
+  set(MuParser_FOUND TRUE)
   return()
 endif()
 
@@ -49,6 +56,7 @@ if(muparser_FOUND)
   endif()
 
   # Stop here, we're done
+  set(MuParser_FOUND TRUE)
   return()
 endif()
 

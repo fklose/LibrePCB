@@ -1,3 +1,9 @@
+# Ignore subsequent calls (https://github.com/LibrePCB/LibrePCB/issues/1812)
+if(TARGET delaunay_triangulation)
+  return()
+endif()
+
+# Find bundled submodule
 set(DT_SUBMODULE_BASEPATH "${PROJECT_SOURCE_DIR}/libs/delaunay-triangulation")
 if(EXISTS "${DT_SUBMODULE_BASEPATH}")
   message(STATUS "Using vendored DelaunayTriangulation")
@@ -14,6 +20,7 @@ if(EXISTS "${DT_SUBMODULE_BASEPATH}")
   )
 
   # Stop here, we're done
+  set(DelaunayTriangulation_FOUND TRUE)
   return()
 endif()
 

@@ -1,3 +1,9 @@
+# Ignore subsequent calls (https://github.com/LibrePCB/LibrePCB/issues/1812)
+if(TARGET fontobene_qt)
+  return()
+endif()
+
+# Find bundled submodule
 set(FONTOBENE_SUBMODULE_BASEPATH "${PROJECT_SOURCE_DIR}/libs/fontobene-qt")
 if(EXISTS "${FONTOBENE_SUBMODULE_BASEPATH}"
    AND NOT UNBUNDLE_FONTOBENE_QT
@@ -15,6 +21,7 @@ if(EXISTS "${FONTOBENE_SUBMODULE_BASEPATH}"
   )
 
   # Stop here, we're done
+  set(FontoBeneQt_FOUND TRUE)
   return()
 endif()
 
@@ -35,6 +42,7 @@ if(FONTOBENE_FOUND)
   add_library(FontoBene::FontoBeneQt ALIAS fontobene_qt)
 
   # Stop here, we're done
+  set(FontoBeneQt_FOUND TRUE)
   return()
 endif()
 
@@ -58,6 +66,7 @@ if(FONTOBENE_INCLUDE_DIR)
   mark_as_advanced(FONTOBENE_INCLUDE_DIR)
 
   # Stop here, we're done
+  set(FontoBeneQt_FOUND TRUE)
   return()
 endif()
 
@@ -88,6 +97,7 @@ if(FONTOBENE_FOUND)
   add_library(FontoBene::FontoBeneQt ALIAS fontobene_qt)
 
   # Stop here, we're done
+  set(FontoBeneQt_FOUND TRUE)
   return()
 endif()
 
@@ -113,6 +123,7 @@ if(FONTOBENE_INCLUDE_DIR)
   mark_as_advanced(FONTOBENE_INCLUDE_DIR)
 
   # Stop here, we're done
+  set(FontoBeneQt_FOUND TRUE)
   return()
 endif()
 

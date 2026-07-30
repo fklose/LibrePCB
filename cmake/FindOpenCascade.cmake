@@ -1,3 +1,8 @@
+# Ignore subsequent calls (https://github.com/LibrePCB/LibrePCB/issues/1812)
+if(TARGET open_cascade)
+  return()
+endif()
+
 # Add library
 add_library(open_cascade INTERFACE)
 add_library(OpenCascade::OpenCascade ALIAS open_cascade)
@@ -6,6 +11,7 @@ add_library(OpenCascade::OpenCascade ALIAS open_cascade)
 if(NOT USE_OPENCASCADE)
   message(STATUS "Building without OpenCascade features")
   set(OCC_EDITION_NAME "N/A") # Referenced from occmodel.cpp
+  set(OpenCascade_FOUND TRUE)
   return()
 endif()
 
@@ -45,6 +51,7 @@ if(OpenCASCADE_FOUND)
   set(OCC_EDITION_NAME "OCCT") # Referenced from occmodel.cpp
 
   # Stop here, we're done
+  set(OpenCascade_FOUND TRUE)
   return()
 endif()
 
@@ -65,6 +72,7 @@ if(OCE_FOUND)
   set(OCC_EDITION_NAME "OCE") # Referenced from occmodel.cpp
 
   # Stop here, we're done
+  set(OpenCascade_FOUND TRUE)
   return()
 endif()
 
