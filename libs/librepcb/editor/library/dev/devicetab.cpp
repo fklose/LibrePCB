@@ -338,8 +338,10 @@ ui::DeviceTabData DeviceTab::getDerivedUiData() const noexcept {
       q2s(brdBgColors.secondary),  // Package foreground color
       mIsInterfaceBroken,  // Interface broken
       mElementDuplicated && (!mDeprecated),  // Element duplicated
-      mMeasureTool ? slint::private_api::MouseCursor::Crosshair
-                   : slint::private_api::MouseCursor::Default,  // Tool cursor
+      slint::cbindgen_private::MouseCursorInner(
+          mMeasureTool
+              ? slint::private_api::BuiltInMouseCursor::Crosshair  // Tool
+              : slint::private_api::BuiltInMouseCursor::Default),  // cursor
       hasUnconnectedPads,  // Has unconnected pads
       hasAutoConnectablePads,  // Has auto-connectable pads
       areAllPadsUnconnected,  // All pads unconnected

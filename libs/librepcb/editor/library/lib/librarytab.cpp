@@ -64,9 +64,9 @@ LibraryTab::LibraryTab(LibraryEditor& editor, bool wizardMode,
     mWizardMode(wizardMode),
     mCurrentPageIndex(mWizardMode ? 0 : 2),
     mCurrentCategoryIndex(0),
-    mCategoriesViewportY(0),
+    mCategoriesContentY(0),
     mCurrentElementIndex(-1),
-    mElementsViewportY(0),
+    mElementsContentY(0),
     mNameParsed(mLibrary.getNames().getDefaultValue()),
     mVersionParsed(mLibrary.getVersion()),
     mDeprecated(false),
@@ -191,10 +191,10 @@ ui::LibraryTabData LibraryTab::getDerivedUiData() const noexcept {
       mManufacturer,  // Manufacturer
       mCategories,  // Component categories
       mCurrentCategoryIndex,  // Current category index
-      mCategoriesViewportY,  // Categories view scroll position
+      mCategoriesContentY,  // Categories view scroll position
       mFilteredElements,  // Filtered elements
       mCurrentElementIndex,  // Current element index
-      mElementsViewportY,  // Elements view scroll position
+      mElementsContentY,  // Elements view scroll position
       ui::RuleCheckData{
           ui::RuleCheckType::LibraryCheck,  // Check type
           ui::RuleCheckState::UpToDate,  // Check state
@@ -211,8 +211,8 @@ ui::LibraryTabData LibraryTab::getDerivedUiData() const noexcept {
 
 void LibraryTab::setDerivedUiData(const ui::LibraryTabData& data) noexcept {
   // State
-  mCategoriesViewportY = data.categories_viewport_y;
-  mElementsViewportY = data.filtered_elements_viewport_y;
+  mCategoriesContentY = data.categories_content_y;
+  mElementsContentY = data.filtered_elements_content_y;
 
   // Metadata
   mName = data.name;
@@ -360,9 +360,9 @@ void LibraryTab::trigger(ui::TabAction a) noexcept {
         onUiDataChanged.notify();
       } else if (mCurrentCategoryIndex != 0) {
         mCurrentCategoryIndex = 0;
-        mCategoriesViewportY = 0;
+        mCategoriesContentY = 0;
         mCurrentElementIndex = 0;
-        mElementsViewportY = 0;
+        mElementsContentY = 0;
         setSelectedCategory(mCategories->row_data(mCurrentCategoryIndex));
         onDerivedUiDataChanged.notify();
       }
