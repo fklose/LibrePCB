@@ -35,6 +35,8 @@
  ******************************************************************************/
 namespace librepcb {
 
+class SI_BusSegment;
+class SI_NetSegment;
 class Schematic;
 
 namespace editor {
@@ -70,6 +72,12 @@ public:
   void setCurrentPosition(const Point& pos) noexcept;
   void rotate(const Angle& angle, bool aroundCurrentPosition) noexcept;
   void mirror(Qt::Orientation orientation, bool aroundCurrentPosition) noexcept;
+  const QSet<SI_NetSegment*>& getModifiedNetSegments() const noexcept {
+    return mModifiedNetSegments;
+  }
+  const QSet<SI_BusSegment*>& getModifiedBusSegments() const noexcept {
+    return mModifiedBusSegments;
+  }
 
 private:
   // Private Methods
@@ -90,6 +98,10 @@ private:
   bool mSnappedToGrid;
   bool mMirrored;
   bool mTextsReset;
+
+  // Segments whose geometry might have been modified by the drag.
+  QSet<SI_NetSegment*> mModifiedNetSegments;
+  QSet<SI_BusSegment*> mModifiedBusSegments;
 
   // Move commands
   QList<CmdSymbolInstanceEdit*> mSymbolEditCmds;
