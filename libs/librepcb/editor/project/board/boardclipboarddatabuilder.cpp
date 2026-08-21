@@ -68,7 +68,7 @@ BoardClipboardDataBuilder::~BoardClipboardDataBuilder() noexcept {
  ******************************************************************************/
 
 std::unique_ptr<BoardClipboardData> BoardClipboardDataBuilder::generate(
-    const Point& cursorPos) const noexcept {
+    const Point& cursorPos) const {
   std::unique_ptr<BoardClipboardData> data(
       new BoardClipboardData(mScene.getBoard().getUuid(), cursorPos));
 
