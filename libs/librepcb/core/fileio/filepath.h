@@ -371,30 +371,40 @@ public:  // Methods
                                const QString& relative) noexcept;
 
   /**
-   * @brief Get the path to the temporary directory (e.g. "/tmp" on Unix/Linux)
+   * @brief Get the path to the application's temporary directory
+   *
+   * Typically returned paths:
+   *
+   * - Windows: `C:/Users/$USER/AppData/Local/Temp/LibrePCB`
+   * - MacOS: Random, e.g.
+   *   `/private/var/folders/g3/pffjr_y96bq06blnkf72x_hw0000gn/T/LibrePCB`
+   * - Linux:
+   *   - `$XDG_RUNTIME_DIR/LibrePCB` -> `/run/user/$USER/LibrePCB`
+   *   - `$TMPDIR/runtime-$USER/LibrePCB` -> `/tmp/runtime-$USER/LibrePCB`
+   *   - `/tmp/runtime-$USER/LibrePCB`
+   *
+   * @note This function is thread-safe.
    *
    * @attention Do not use this to store any files in it!
    *            Use #getRandomTempPath() instead.
    *
-   * @return The filepath (in case of an error, the path can be invalid!)
-   */
-  static FilePath getTempPath() noexcept;
-
-  /**
-   * @brief Get the path to the temporary application directory (e.g.
-   * "/tmp/librepcb")
-   *
-   * @attention Do not use this to store any files in it!
-   *            Use #getRandomTempPath() instead.
-   *
-   * @return The filepath (in case of an error, the path can be invalid!)
+   * @return Guaranteed valid file path to a librepcb-specific directory
+   *         for the current user (i.e. this temp dir is neither shared
+   *         between applications, not shared between users). However, the
+   *         directory may not exist (yet).
    */
   static FilePath getApplicationTempPath() noexcept;
 
   /**
-   * @brief Get a random temporary directory path (e.g. "/tmp/librepcb/42")
+   * @brief Get a random temporary file path
    *
-   * @return The random filepath (in case of an error, the path can be invalid!)
+   * This will return a path inside the directory #getApplicationTempPath(),
+   * which then can be used to create a temporary file or folder. The random
+   * name follows the pattern `<UNIX_TIMESTAMP_MS>_<RANDOM_NUMBER>` as required
+   * by ::librepcb::Application::cleanTemporaryDirectory() for the automatic
+   * cleanup.
+   *
+   * @return The random filepath to a non-existent file or folder.
    */
   static FilePath getRandomTempPath() noexcept;
 

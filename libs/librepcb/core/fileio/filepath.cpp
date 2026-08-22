@@ -214,17 +214,38 @@ FilePath FilePath::fromRelative(const FilePath& base,
   return FilePath(base.mFileInfo.filePath() % QLatin1Char('/') % relative);
 }
 
-FilePath FilePath::getTempPath() noexcept {
-  FilePath tmp(QDir::tempPath());
-
-  if (!tmp.isExistingDir())
-    qWarning() << "Could not determine the system's temporary directory!";
-
-  return tmp;
-}
-
 FilePath FilePath::getApplicationTempPath() noexcept {
-  return getTempPath().getPathTo("librepcb");
+  auto detect = []() {
+    // Use different temporary directory if supplied by environment variable
+    // "LIBREPCB_TEMP_DIR" (e.g. for deployment). However, this is just a
+    // safety fallback which is not communicated publicly. If no problems occur
+    // with the default temp path, we should remove this fallback some day.
+    FilePath fp(qgetenv("LIBREPCB_TEMP_DIR"));
+    if (fp.isValid()) {
+      return fp;
+    }
+
+    // Note: Temporary directory has to be per-user, see
+    // https://github.com/LibrePCB/LibrePCB/issues/1871.
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)  // UNIX/Linux
+    // QStandardPaths::RuntimeLocation is a per-user directory on UNIX systems.
+    fp.setPath(
+        QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation));
+#else
+    // QStandardPaths::RuntimeLocation cannot be used on macOS/Windows since
+    // it would return a really strange/wrong directory. However,
+    // QStandardPaths::TempLocation is a per-user directory on those systems,
+    // so we can use it instead.
+    fp.setPath(QStandardPaths::writableLocation(QStandardPaths::TempLocation));
+#endif
+    if (!fp.isValid()) {
+      qCritical() << "Could not determine the system's temporary directory!";
+    }
+    return fp.getPathTo("LibrePCB");
+  };
+
+  static const FilePath value = detect();
+  return value;
 }
 
 FilePath FilePath::getRandomTempPath() noexcept {

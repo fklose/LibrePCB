@@ -23,6 +23,7 @@
 
 #include <gtest/gtest.h>
 #include <librepcb/core/fileio/filepath.h>
+#include <librepcb/core/fileio/fileutils.h>
 
 #include <QtCore>
 
@@ -56,7 +57,7 @@ class FilePathTest : public ::testing::TestWithParam<FilePathTestData> {};
  *  Test Methods
  ******************************************************************************/
 
-TEST_P(FilePathTest, testDefaultConstructor) {
+TEST(FilePathTest, testDefaultConstructor) {
   FilePath p;
   EXPECT_FALSE(p.isValid());
   EXPECT_EQ(QString(""), p.toStr());
@@ -152,6 +153,25 @@ TEST_P(FilePathTest, testOperatorAssign) {
   p2 = p1;
   EXPECT_EQ(p1.isValid(), p2.isValid());
   EXPECT_EQ(p1.toStr(), p2.toStr());
+}
+
+TEST(FilePathTest, testGetApplicationTempPath) {
+  const FilePath fp = FilePath::getApplicationTempPath();
+  std::cout << qPrintable(fp.toStr()) << std::endl;
+  EXPECT_TRUE(fp.isValid());
+}
+
+TEST(FilePathTest, testGetRandomTempPath) {
+  const FilePath fp = FilePath::getRandomTempPath();
+  EXPECT_TRUE(fp.isLocatedInDir(FilePath::getApplicationTempPath()));
+
+  // Test if we can create a file.
+  FileUtils::writeFile(fp, "Test");
+  FileUtils::removeFile(fp);
+
+  // Test if we can create a folder.
+  FileUtils::makePath(fp);
+  FileUtils::removeDirRecursively(fp);
 }
 
 TEST(FilePathTest, testCleanFileName) {
