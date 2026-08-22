@@ -12,12 +12,36 @@ there are many other ways how to contribute to the LibrePCB project, see
   your idea first!** Also note that we do not accept major changes
   (e.g. changes affecting the file format) at any time, see details in our
   [development workflow documentation](https://developers.librepcb.org/da/dbc/doc_release_workflow.html#doc_release_workflow_branches).
-- Please search issues and pull requests before adding something new to avoid duplicating efforts and conversations.
+- Please search issues and pull requests before adding something new to avoid
+  duplicating efforts and conversations.
 - We use some labels to mark issues as suitable for contributors, check those
   out to find something to work on:
   - [`help wanted`](https://github.com/LibrePCB/LibrePCB/labels/help%20wanted)
   - [`easy`](https://github.com/LibrePCB/LibrePCB/labels/easy)
 - To contact us, use one of the options listed at https://librepcb.org/help/.
+
+## Use of AI/LLM/Agents
+
+I, [@ubruhin](https://github.com/ubruhin), am tired of reading LLM generated
+text or code slop and don't want to waste time with it. Therefore I kindly
+ask you to follow some **important** rules about the use of LLM / agents:
+
+- Do not use LLM for writing pull request descriptions, issues, or comments
+  on those. If I want to chat with an LLM, I will do so on myself. In issues
+  and pull requests, I want to chat with humans.
+- Any usage of LLM has to be declared clearly. No matter if you write a comment
+  referencing "knowledge" you gained through an LLM, or if you used an LLM to
+  write some of the code of a pull request - make it transparent what you have
+  used it for.
+- Any output from an LLM (no matter whether "knowledge" or code) has to be
+  verified **in detail** by yourself. It is not my job to correct what the LLM
+  told you wrong or coded wrong.
+
+To summarize: Use of LLMs is not forbidden when contributing to LibrePCB. Just
+use your brain to make sure no AI slop is ending up in issues or pull requests.
+
+As soon as I suspect the use of an LLM without following those rules, I'll
+stop the discussion and close the pull request or issue.
 
 ## Getting Started
 
@@ -62,9 +86,6 @@ there are many other ways how to contribute to the LibrePCB project, see
 - Run all tests to ensure nothing else was accidentally broken.
   - This is done by running the binary
     `./build/tests/unittests/librepcb-unittests`.
-- If you like, feel free to add yourself to the
-  [AUTHORS.md](https://github.com/LibrePCB/LibrePCB/blob/master/AUTHORS.md)
-  file.
 
 ## Submitting Changes
 
