@@ -20,8 +20,8 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/fileio/transactionalfilesystem.h>
 #include <librepcb/core/fileio/ziparchive.h>
@@ -46,7 +46,7 @@ public:
 
   TransactionalFileSystemTest() {
     // temporary dir (with spaces in path to make tests harder)
-    mTmpDir = FilePath::getRandomTempPath().getPathTo("spaces in path");
+    mTmpDir = Application::getRandomTempPath().getPathTo("spaces in path");
     FileUtils::writeFile(mTmpDir.getPathTo("1.txt"), "1");
 
     // non-existing dir

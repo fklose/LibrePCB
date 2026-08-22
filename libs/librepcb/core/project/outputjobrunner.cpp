@@ -762,7 +762,7 @@ void OutputJobRunner::runImpl(const ArchiveOutputJob& job) {
 
   // Collect input files.
   std::shared_ptr<TransactionalFileSystem> fs =
-      TransactionalFileSystem::openRW(FilePath::getRandomTempPath());
+      TransactionalFileSystem::openRW(Application::getRandomTempPath());
   for (auto it = job.getInputJobs().begin(); it != job.getInputJobs().end();
        ++it) {
     if (!mWriter->getWrittenFiles().contains(it.key())) {

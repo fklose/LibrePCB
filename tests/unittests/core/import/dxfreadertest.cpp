@@ -21,6 +21,7 @@
  *  Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/import/dxfreader.h>
 #include <librepcb/core/serialization/sexpression.h>
@@ -43,7 +44,7 @@ protected:
    * @brief Helper to call reader.parse() with DXF content as bytearray
    */
   void parse(const QByteArray& dxf) {
-    FilePath fp = FilePath::getRandomTempPath();
+    FilePath fp = Application::getRandomTempPath();
     FileUtils::writeFile(fp, dxf);
     reader.parse(fp);
     FileUtils::removeFile(fp);
@@ -75,7 +76,7 @@ protected:
  ******************************************************************************/
 
 TEST_F(DxfReaderTest, testInexistentFileThrowsRuntimeError) {
-  FilePath fp = FilePath::getRandomTempPath();
+  FilePath fp = Application::getRandomTempPath();
   EXPECT_THROW(reader.parse(fp), RuntimeError);
 }
 

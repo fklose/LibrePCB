@@ -20,8 +20,8 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/exceptions.h>
 #include <librepcb/core/fileio/filepath.h>
 #include <librepcb/core/fileio/fileutils.h>
@@ -46,7 +46,7 @@ public:
   FilePath mZipFilePath;
 
   ZipWriterZipArchiveTest()
-    : mTmpDir(FilePath::getRandomTempPath()),
+    : mTmpDir(Application::getRandomTempPath()),
       mZipFilePath(mTmpDir.getPathTo("test file.zip")) {}
   ~ZipWriterZipArchiveTest() override {
     QDir(mTmpDir.toStr()).removeRecursively();

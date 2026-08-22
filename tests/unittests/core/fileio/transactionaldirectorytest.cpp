@@ -20,8 +20,8 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/transactionaldirectory.h>
 #include <librepcb/core/fileio/transactionalfilesystem.h>
 
@@ -44,14 +44,14 @@ public:
     // Open in read-only mode to avoid creating a ".lock" file which would
     // influence the tests.
     mFileSystem =
-        TransactionalFileSystem::openRO(FilePath::getRandomTempPath());
+        TransactionalFileSystem::openRO(Application::getRandomTempPath());
     mFileSystem->write("a.txt", "a");
     mFileSystem->write("a/b.txt", "b");
     mFileSystem->write("a/b/c.txt", "c");
     mFileSystem->write("a/b/c/d.txt", "d");
 
     mEmptyFileSystem =
-        TransactionalFileSystem::openRO(FilePath::getRandomTempPath());
+        TransactionalFileSystem::openRO(Application::getRandomTempPath());
   }
 
   ~TransactionalDirectoryTest() override {}
@@ -65,7 +65,7 @@ TEST_F(TransactionalDirectoryTest, testDefaultConstructorCreatesTempFs) {
   TransactionalDirectory dir;
   ASSERT_TRUE(dir.getFileSystem());
   EXPECT_TRUE(dir.getFileSystem()->getAbsPath().isLocatedInDir(
-      FilePath::getApplicationTempPath()));
+      Application::getTempDir()));
 }
 
 TEST_F(TransactionalDirectoryTest, testDefaultConstructorCreatesEmptyFs) {

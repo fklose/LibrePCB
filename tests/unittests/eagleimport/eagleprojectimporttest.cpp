@@ -23,6 +23,7 @@
 #include "../testhelpers.h"
 
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/filepath.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/fileio/transactionaldirectory.h>
@@ -54,7 +55,7 @@ class EagleProjectImportTest : public ::testing::Test {
 public:
   FilePath mTmpDir;
 
-  EagleProjectImportTest() : mTmpDir(FilePath::getRandomTempPath()) {}
+  EagleProjectImportTest() : mTmpDir(Application::getRandomTempPath()) {}
 
   ~EagleProjectImportTest() override {
     QDir(mTmpDir.toStr()).removeRecursively();

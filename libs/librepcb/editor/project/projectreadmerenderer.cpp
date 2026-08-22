@@ -22,6 +22,7 @@
  ******************************************************************************/
 #include "projectreadmerenderer.h"
 
+#include <librepcb/core/application.h>
 #include <librepcb/core/exceptions.h>
 #include <librepcb/core/fileio/filepath.h>
 #include <librepcb/core/fileio/fileutils.h>
@@ -110,7 +111,7 @@ void ProjectReadmeRenderer::start() noexcept {
 QPixmap ProjectReadmeRenderer::render(const FilePath& fp, int width) noexcept {
   try {
     // Create temporary directory.
-    const FilePath tmpDir = FilePath::getRandomTempPath();
+    const FilePath tmpDir = Application::getRandomTempPath();
     auto sg =
         scopeGuard([tmpDir]() { QDir(tmpDir.toStr()).removeRecursively(); });
 

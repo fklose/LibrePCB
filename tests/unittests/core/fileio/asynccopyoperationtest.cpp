@@ -20,8 +20,8 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/asynccopyoperation.h>
 #include <librepcb/core/fileio/fileutils.h>
 
@@ -54,7 +54,7 @@ public:
   QObject mContext;
 
   AsyncCopyOperationTest()
-    : mTmpDir(FilePath::getRandomTempPath()),
+    : mTmpDir(Application::getRandomTempPath()),
       mNonExistingDir(mTmpDir.getPathTo("non existing")),
       mEmptyDir(mTmpDir.getPathTo("empty directory")),
       mPopulatedDir(mTmpDir.getPathTo("populated directory")),

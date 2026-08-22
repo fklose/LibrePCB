@@ -22,6 +22,7 @@
  ******************************************************************************/
 #include "occmodel.h"
 
+#include "../application.h"
 #include "../exceptions.h"
 #include "../fileio/filepath.h"
 #include "../fileio/fileutils.h"
@@ -701,7 +702,7 @@ std::unique_ptr<OccModel> OccModel::loadStep(const QByteArray content) {
     std::istringstream is(content.data());
     const IFSelect_ReturnStatus ret = reader.ReadStream("stream.step", is);
 #else
-    FilePath tmp = FilePath::getRandomTempPath();
+    const FilePath tmp = Application::getRandomTempPath();
     FileUtils::writeFile(tmp, content);  // can throw
     const IFSelect_ReturnStatus ret = reader.ReadFile(qPrintable(tmp.toStr()));
     FileUtils::removeFile(tmp);  // can throw

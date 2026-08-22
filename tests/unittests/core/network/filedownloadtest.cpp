@@ -23,6 +23,7 @@
 #include "networkrequestbasesignalreceiver.h"
 
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/network/filedownload.h>
 #include <librepcb/core/network/networkaccessmanager.h>
@@ -58,7 +59,7 @@ public:
   NetworkRequestBaseSignalReceiver mSignalReceiver;
   static NetworkAccessManager* sDownloadManager;
 
-  FileDownloadTest() : mTmpDir(FilePath::getRandomTempPath()) {}
+  FileDownloadTest() : mTmpDir(Application::getRandomTempPath()) {}
 
   ~FileDownloadTest() override { QDir(mTmpDir.toStr()).removeRecursively(); }
 

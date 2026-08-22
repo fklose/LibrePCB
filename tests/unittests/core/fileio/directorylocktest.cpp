@@ -20,8 +20,8 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/exceptions.h>
 #include <librepcb/core/fileio/directorylock.h>
 #include <librepcb/core/fileio/fileutils.h>
@@ -43,7 +43,7 @@ class DirectoryLockTest : public ::testing::Test {
 protected:
   void SetUp() override {
     // create temporary, empty directory
-    mTempDir = FilePath::getRandomTempPath();
+    mTempDir = Application::getRandomTempPath();
     mTempLockFilePath = FilePath(mTempDir.toStr() % "/.lock");
     if (mTempDir.isExistingDir()) {
       FileUtils::removeDirRecursively(mTempDir);  // can throw

@@ -21,6 +21,7 @@
  *  Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/library/cat/componentcategory.h>
 #include <librepcb/core/library/cat/packagecategory.h>
@@ -57,7 +58,7 @@ public:
   std::unique_ptr<SQLiteDatabase> mDb;
   std::unique_ptr<WorkspaceLibraryDbWriter> mWriter;
 
-  CategoryTreeModelLegacyTest() : mWsDir(FilePath::getRandomTempPath()) {
+  CategoryTreeModelLegacyTest() : mWsDir(Application::getRandomTempPath()) {
     FileUtils::makePath(mWsDir);
     mWsDb = std::make_unique<WorkspaceLibraryDb>(mWsDir);
     mDb = std::make_unique<SQLiteDatabase>(mWsDb->getFilePath());

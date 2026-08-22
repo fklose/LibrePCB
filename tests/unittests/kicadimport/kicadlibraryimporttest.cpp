@@ -21,6 +21,7 @@
  *  Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/utils/messagelogger.h>
 #include <librepcb/core/workspace/workspacelibrarydb.h>
@@ -46,7 +47,7 @@ public:
   FilePath mWsDir;
   std::unique_ptr<WorkspaceLibraryDb> mWsDb;
 
-  KiCadLibraryImportTest() : mWsDir(FilePath::getRandomTempPath()) {
+  KiCadLibraryImportTest() : mWsDir(Application::getRandomTempPath()) {
     FileUtils::makePath(mWsDir);
     mWsDb = std::make_unique<WorkspaceLibraryDb>(mWsDir);
   }
@@ -87,7 +88,7 @@ public:
 
 TEST_F(KiCadLibraryImportTest, testImport) {
   const FilePath src(TEST_DATA_DIR "/unittests/kicadimport");
-  const FilePath dst = FilePath::getRandomTempPath();
+  const FilePath dst = Application::getRandomTempPath();
 
   KiCadLibraryImport import(*mWsDb, dst);
   std::shared_ptr<MessageLogger> log = std::make_shared<MessageLogger>();

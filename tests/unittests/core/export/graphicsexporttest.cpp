@@ -20,10 +20,10 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include "graphicsexporttest.h"
 
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/export/graphicsexport.h>
 
 #include <QtCore>
@@ -44,7 +44,7 @@ public:
   FilePath mOutputDir;
   QVector<FilePath> mSavedFiles;  // From signal savingFile().
 
-  GraphicsExportTest() : mOutputDir(FilePath::getRandomTempPath()) {
+  GraphicsExportTest() : mOutputDir(Application::getRandomTempPath()) {
     QSettings().clear();
   }
 

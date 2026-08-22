@@ -20,8 +20,8 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/exceptions.h>
 #include <librepcb/core/fileio/filepath.h>
 #include <librepcb/core/fileio/fileutils.h>
@@ -62,7 +62,7 @@ static void setupFile(const FilePath& pth, const QByteArray& content,
 
 class FileUtilsTest : public ::testing::Test {
 public:
-  FilePath root{FilePath::getRandomTempPath()};
+  FilePath root{Application::getRandomTempPath()};
 
   // the sources of already existing files and directories
   FilePath rootFile{root.getPathTo("file.txt")};  // source for all operations

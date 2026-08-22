@@ -45,7 +45,8 @@ namespace editor {
 SchematicClipboardData::SchematicClipboardData(
     const Uuid& schematicUuid, const Point& cursorPos,
     const AssemblyVariantList& assemblyVariants) noexcept
-  : mFileSystem(TransactionalFileSystem::openRW(FilePath::getRandomTempPath())),
+  : mFileSystem(
+        TransactionalFileSystem::openRW(Application::getRandomTempPath())),
     mSchematicUuid(schematicUuid),
     mCursorPos(cursorPos),
     mAssemblyVariants(assemblyVariants),

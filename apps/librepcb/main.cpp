@@ -197,7 +197,7 @@ static void writeLogHeader() noexcept {
   qInfo() << "Cache directory:" << Application::getCacheDir().toNative();
 
   // write temp directory to log (nice to know for devs/packagers)
-  qInfo() << "Temp directory:" << FilePath::getApplicationTempPath().toNative();
+  qInfo() << "Temp directory:" << Application::getTempDir().toNative();
 }
 
 /*******************************************************************************

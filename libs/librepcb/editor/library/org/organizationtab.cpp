@@ -36,6 +36,7 @@
 #include "../libraryeditor.h"
 #include "organizationpcbdesignrulesmodel.h"
 
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/fileio/transactionaldirectory.h>
 #include <librepcb/core/fileio/transactionalfilesystem.h>
@@ -484,7 +485,7 @@ void OrganizationTab::execOutputJobsDialog(
 
 Project& OrganizationTab::getTmpProject() {
   if (!mTmpProject) {
-    auto fs = TransactionalFileSystem::openRO(FilePath::getRandomTempPath());
+    auto fs = TransactionalFileSystem::openRO(Application::getRandomTempPath());
     mTmpProject = Project::create(std::make_unique<TransactionalDirectory>(fs),
                                   "tmp.lpp");
   }

@@ -20,8 +20,8 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/exceptions.h>
 #include <librepcb/core/fileio/csvfile.h>
 #include <librepcb/core/fileio/filepath.h>
@@ -116,7 +116,7 @@ TEST_F(CsvFileTest, testSaveToFile) {
   f.addValue({"Value", "Value With Space", "With,Comma", "\"With Quotes\""});
   f.addValue({"-1.2345", "Foo\r\nBar", " spaces around ", "äöü"});
 
-  FilePath fp = FilePath::getRandomTempPath();
+  FilePath fp = Application::getRandomTempPath();
   f.saveToFile(fp);
   EXPECT_EQ(
       "# Foo\n"

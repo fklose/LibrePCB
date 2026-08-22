@@ -214,49 +214,6 @@ FilePath FilePath::fromRelative(const FilePath& base,
   return FilePath(base.mFileInfo.filePath() % QLatin1Char('/') % relative);
 }
 
-FilePath FilePath::getApplicationTempPath() noexcept {
-  auto detect = []() {
-    // Use different temporary directory if supplied by environment variable
-    // "LIBREPCB_TEMP_DIR" (e.g. for deployment). However, this is just a
-    // safety fallback which is not communicated publicly. If no problems occur
-    // with the default temp path, we should remove this fallback some day.
-    FilePath fp(qgetenv("LIBREPCB_TEMP_DIR"));
-    if (fp.isValid()) {
-      return fp;
-    }
-
-    // Note: Temporary directory has to be per-user, see
-    // https://github.com/LibrePCB/LibrePCB/issues/1871.
-#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)  // UNIX/Linux
-    // QStandardPaths::RuntimeLocation is a per-user directory on UNIX systems.
-    fp.setPath(
-        QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation));
-#else
-    // QStandardPaths::RuntimeLocation cannot be used on macOS/Windows since
-    // it would return a really strange/wrong directory. However,
-    // QStandardPaths::TempLocation is a per-user directory on those systems,
-    // so we can use it instead.
-    fp.setPath(QStandardPaths::writableLocation(QStandardPaths::TempLocation));
-#endif
-    if (!fp.isValid()) {
-      qCritical() << "Could not determine the system's temporary directory!";
-    }
-    return fp.getPathTo("LibrePCB");
-  };
-
-  static const FilePath value = detect();
-  return value;
-}
-
-FilePath FilePath::getRandomTempPath() noexcept {
-  // Attention: This pattern is assumed by
-  // Application::cleanTemporaryDirectory() to detect the age of tmp files!
-  QString random = QString("%1_%2")
-                       .arg(QDateTime::currentMSecsSinceEpoch())
-                       .arg(QRandomGenerator::global()->generate());
-  return getApplicationTempPath().getPathTo(random);
-}
-
 QString FilePath::cleanFileName(const QString& userInput,
                                 CleanFileNameOptions options,
                                 int maxLength) noexcept {

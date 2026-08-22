@@ -23,6 +23,7 @@
 #include <Standard_Version.hxx>
 #include <gtest/gtest.h>
 #include <librepcb/core/3d/occmodel.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/exceptions.h>
 #include <librepcb/core/fileio/filepath.h>
 #include <librepcb/core/fileio/fileutils.h>
@@ -183,7 +184,8 @@ TEST_F(OccModelTest, testBuildAndSaveAssembly) {
       Transform(Point(Length(10000), Length(20000)), Angle::deg45(), true),
       "X2");
 
-  const FilePath outFp = FilePath::getRandomTempPath().getPathTo("te st.step");
+  const FilePath outFp =
+      Application::getRandomTempPath().getPathTo("te st.step");
   assembly->saveAsStep("PCB Assembly", outFp);
 
   // Read back.

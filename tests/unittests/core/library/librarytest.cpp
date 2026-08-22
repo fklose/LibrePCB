@@ -46,7 +46,7 @@ public:
 
   LibraryTest() {
     // the whitespaces in the path are there to make the test even stronger ;)
-    mTmpDir = FilePath::getRandomTempPath().getPathTo("test dir.lplib");
+    mTmpDir = Application::getRandomTempPath().getPathTo("test dir.lplib");
   }
 
   ~LibraryTest() override {

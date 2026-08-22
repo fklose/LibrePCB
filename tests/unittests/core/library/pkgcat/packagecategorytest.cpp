@@ -47,7 +47,7 @@ public:
 
   PackageCategoryTest() {
     // the whitespaces in the path are there to make the test even stronger ;)
-    mTmpDir = FilePath::getRandomTempPath().getPathTo(sUuid);
+    mTmpDir = Application::getRandomTempPath().getPathTo(sUuid);
   }
 
   ~PackageCategoryTest() override {
