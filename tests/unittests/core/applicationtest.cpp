@@ -67,6 +67,25 @@ TEST_F(ApplicationTest, testBuildFullVersionDetails) {
   EXPECT_GE(s.split("\n").count(), 5);
 }
 
+TEST_F(ApplicationTest, testGetTempDir) {
+  const FilePath fp = Application::getTempDir();
+  std::cout << qPrintable(fp.toStr()) << std::endl;
+  EXPECT_TRUE(fp.isValid());
+}
+
+TEST_F(ApplicationTest, testGetRandomTempPath) {
+  const FilePath fp = Application::getRandomTempPath();
+  EXPECT_TRUE(fp.isLocatedInDir(Application::getTempDir()));
+
+  // Test if we can create a file.
+  FileUtils::writeFile(fp, "test");
+  FileUtils::removeFile(fp);
+
+  // Test if we can create a folder.
+  FileUtils::makePath(fp);
+  FileUtils::removeDirRecursively(fp);
+}
+
 TEST_F(ApplicationTest, testGetCacheDir) {
   // Check if the resources directory is valid and writable.
   EXPECT_TRUE(Application::getCacheDir().isValid());

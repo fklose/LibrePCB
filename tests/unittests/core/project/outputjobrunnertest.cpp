@@ -21,6 +21,7 @@
  *  Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/fileio/transactionaldirectory.h>
 #include <librepcb/core/fileio/transactionalfilesystem.h>
@@ -52,7 +53,7 @@ class OutputJobRunnerTest : public ::testing::Test {
 public:
   FilePath mOutDir;
 
-  OutputJobRunnerTest() { mOutDir = FilePath::getRandomTempPath(); }
+  OutputJobRunnerTest() { mOutDir = Application::getRandomTempPath(); }
 
   ~OutputJobRunnerTest() override { QDir(mOutDir.toStr()).removeRecursively(); }
 
@@ -85,7 +86,7 @@ public:
   std::unique_ptr<Project> createProject() const {
     std::unique_ptr<Project> project = Project::create(
         std::make_unique<TransactionalDirectory>(
-            TransactionalFileSystem::openRW(FilePath::getRandomTempPath())),
+            TransactionalFileSystem::openRW(Application::getRandomTempPath())),
         "project.lpp");
     return project;
   }

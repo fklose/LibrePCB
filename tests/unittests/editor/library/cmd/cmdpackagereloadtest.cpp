@@ -21,6 +21,7 @@
  *  Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/fileio/transactionaldirectory.h>
 #include <librepcb/core/fileio/transactionalfilesystem.h>
@@ -43,7 +44,7 @@ namespace tests {
 class CmdPackageReloadTest : public ::testing::Test {
 public:
   FilePath mTmpDir;
-  CmdPackageReloadTest() : mTmpDir(FilePath::getRandomTempPath()) {}
+  CmdPackageReloadTest() : mTmpDir(Application::getRandomTempPath()) {}
   ~CmdPackageReloadTest() override {
     QDir(mTmpDir.toStr()).removeRecursively();
   }

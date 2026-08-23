@@ -20,11 +20,11 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include "../../core/export/graphicsexporttest.h"
 #include "../../testhelpers.h"
 
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/export/graphicsexport.h>
 #include <librepcb/core/export/graphicsexportsettings.h>
 #include <librepcb/core/fileio/filepath.h>
@@ -57,7 +57,7 @@ public:
   FilePath mOutputDir;
   QVector<FilePath> mRequestedFilesToOpen;  // From signal requestOpenFile().
 
-  GraphicsExportDialogTest() : mOutputDir(FilePath::getRandomTempPath()) {
+  GraphicsExportDialogTest() : mOutputDir(Application::getRandomTempPath()) {
     QSettings().clear();
   }
 

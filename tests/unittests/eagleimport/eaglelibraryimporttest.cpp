@@ -21,6 +21,7 @@
  *  Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/utils/messagelogger.h>
 #include <librepcb/eagleimport/eaglelibraryimport.h>
 
@@ -45,7 +46,7 @@ class EagleLibraryImportTest : public ::testing::Test {};
 
 TEST_F(EagleLibraryImportTest, testImport) {
   FilePath src(TEST_DATA_DIR "/unittests/eagleimport/resistor.lbr");
-  FilePath dst = FilePath::getRandomTempPath();
+  FilePath dst = Application::getRandomTempPath();
 
   EagleLibraryImport import(dst);
 

@@ -22,6 +22,7 @@
  ******************************************************************************/
 #include "transactionaldirectory.h"
 
+#include "../application.h"
 #include "transactionalfilesystem.h"
 
 /*******************************************************************************
@@ -36,7 +37,8 @@ namespace librepcb {
 TransactionalDirectory::TransactionalDirectory(QObject* parent)
   : FileSystem(parent),
     // Open file system in read-only mode to avoid creating ".lock" file!
-    mFileSystem(TransactionalFileSystem::openRO(FilePath::getRandomTempPath())),
+    mFileSystem(
+        TransactionalFileSystem::openRO(Application::getRandomTempPath())),
     mPath() {
 }
 

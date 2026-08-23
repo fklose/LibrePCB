@@ -21,6 +21,7 @@
  *  Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/fileio/transactionalfilesystem.h>
 #include <librepcb/core/network/networkaccessmanager.h>
@@ -64,7 +65,7 @@ NetworkAccessManager* LibraryDownloadTest::sDownloadManager = nullptr;
 
 TEST_F(LibraryDownloadTest, testDownloadInvalidLibrary) {
   // create temporary directory
-  FilePath dstDir = FilePath::getRandomTempPath();
+  FilePath dstDir = Application::getRandomTempPath();
   FilePath dstLibDir = dstDir.getPathTo("my library");
   FileUtils::makePath(dstDir);
 
@@ -97,7 +98,7 @@ TEST_F(LibraryDownloadTest, testDownloadInvalidLibrary) {
 
 TEST_F(LibraryDownloadTest, testDownloadValidLibrary) {
   // create temporary directory
-  FilePath dstDir = FilePath::getRandomTempPath();
+  FilePath dstDir = Application::getRandomTempPath();
   FilePath dstLibDir = dstDir.getPathTo("my library");
   FileUtils::makePath(dstDir);
 
@@ -132,7 +133,7 @@ TEST_F(LibraryDownloadTest, testDownloadValidLibrary) {
 
 TEST_F(LibraryDownloadTest, testDownloadValidNestedLibrary) {
   // create temporary directory
-  FilePath dstDir = FilePath::getRandomTempPath();
+  FilePath dstDir = Application::getRandomTempPath();
   FilePath dstLibDir = dstDir.getPathTo("my library");
   FileUtils::makePath(dstDir);
 
@@ -169,7 +170,7 @@ TEST_F(LibraryDownloadTest, testDownloadValidNestedLibrary) {
 
 TEST_F(LibraryDownloadTest, testDownloadValidLibraryDestinationAlreadyExists) {
   // create temporary directory
-  FilePath dstDir = FilePath::getRandomTempPath();
+  FilePath dstDir = Application::getRandomTempPath();
   FilePath dstLibDir = dstDir.getPathTo("my library");
   FileUtils::makePath(dstDir);
 

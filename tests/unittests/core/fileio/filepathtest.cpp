@@ -56,7 +56,7 @@ class FilePathTest : public ::testing::TestWithParam<FilePathTestData> {};
  *  Test Methods
  ******************************************************************************/
 
-TEST_P(FilePathTest, testDefaultConstructor) {
+TEST(FilePathTest, testDefaultConstructor) {
   FilePath p;
   EXPECT_FALSE(p.isValid());
   EXPECT_EQ(QString(""), p.toStr());

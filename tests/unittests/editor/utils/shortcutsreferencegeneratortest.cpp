@@ -20,10 +20,10 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include "../../testhelpers.h"
 
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/filepath.h>
 #include <librepcb/editor/editorcommandset.h>
 #include <librepcb/editor/utils/shortcutsreferencegenerator.h>
@@ -48,7 +48,7 @@ class ShortcutsReferenceGeneratorTest : public ::testing::Test {};
  ******************************************************************************/
 
 TEST_F(ShortcutsReferenceGeneratorTest, testExportPdfMultipleTimes) {
-  FilePath fp = FilePath::getRandomTempPath().getPathTo("test.pdf");
+  FilePath fp = Application::getRandomTempPath().getPathTo("test.pdf");
   ShortcutsReferenceGenerator gen(EditorCommandSet::instance());
   EXPECT_TRUE(gen.generatePdf(fp)) << "Page layout overflow!";
   EXPECT_TRUE(fp.isExistingFile());

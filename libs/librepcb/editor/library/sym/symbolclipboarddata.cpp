@@ -51,7 +51,8 @@ namespace editor {
 
 SymbolClipboardData::SymbolClipboardData(const Uuid& symbolUuid,
                                          const Point& cursorPos) noexcept
-  : mFileSystem(TransactionalFileSystem::openRW(FilePath::getRandomTempPath())),
+  : mFileSystem(
+        TransactionalFileSystem::openRW(Application::getRandomTempPath())),
     mSymbolUuid(symbolUuid),
     mCursorPos(cursorPos) {
 }

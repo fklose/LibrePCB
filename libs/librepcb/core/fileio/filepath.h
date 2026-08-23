@@ -371,34 +371,6 @@ public:  // Methods
                                const QString& relative) noexcept;
 
   /**
-   * @brief Get the path to the temporary directory (e.g. "/tmp" on Unix/Linux)
-   *
-   * @attention Do not use this to store any files in it!
-   *            Use #getRandomTempPath() instead.
-   *
-   * @return The filepath (in case of an error, the path can be invalid!)
-   */
-  static FilePath getTempPath() noexcept;
-
-  /**
-   * @brief Get the path to the temporary application directory (e.g.
-   * "/tmp/librepcb")
-   *
-   * @attention Do not use this to store any files in it!
-   *            Use #getRandomTempPath() instead.
-   *
-   * @return The filepath (in case of an error, the path can be invalid!)
-   */
-  static FilePath getApplicationTempPath() noexcept;
-
-  /**
-   * @brief Get a random temporary directory path (e.g. "/tmp/librepcb/42")
-   *
-   * @return The random filepath (in case of an error, the path can be invalid!)
-   */
-  static FilePath getRandomTempPath() noexcept;
-
-  /**
    * @brief Clean a given string so that it becomes a valid filename
    *
    * Every time a file- or directory name needs to be constructed (e.g. from

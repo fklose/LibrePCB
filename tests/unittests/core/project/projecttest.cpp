@@ -50,7 +50,8 @@ public:
 
   ProjectTest() {
     // the whitespaces in the path are there to make the test even stronger ;)
-    mProjectDir = FilePath::getRandomTempPath().getPathTo("test project dir");
+    mProjectDir =
+        Application::getRandomTempPath().getPathTo("test project dir");
     mProjectFile = mProjectDir.getPathTo("test project.lpp");
     mLogsDir = mProjectDir.getPathTo("logs");
   }

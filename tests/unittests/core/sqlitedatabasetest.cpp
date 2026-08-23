@@ -20,8 +20,8 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/exceptions.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/sqlitedatabase.h>
@@ -43,7 +43,7 @@ class SQLiteDatabaseTest : public ::testing::Test {
 protected:
   void SetUp() override {
     // create temporary, empty directory
-    mTempDir = FilePath::getRandomTempPath();
+    mTempDir = Application::getRandomTempPath();
     mTempDbFilePath = mTempDir.getPathTo("db.sqlite");
     if (mTempDir.isExistingDir()) {
       FileUtils::removeDirRecursively(mTempDir);  // can throw

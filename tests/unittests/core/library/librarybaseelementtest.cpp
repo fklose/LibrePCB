@@ -21,6 +21,7 @@
  *  Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/fileio/transactionalfilesystem.h>
 #include <librepcb/core/library/librarybaseelement.h>
@@ -43,7 +44,7 @@ public:
   QScopedPointer<LibraryBaseElement> mNewElement;
 
   LibraryBaseElementTest() {
-    mTempDir = FilePath::getRandomTempPath();
+    mTempDir = Application::getRandomTempPath();
 
     mNewElement.reset(new LibraryBaseElement(
         "sym", "symbol", Uuid::createRandom(), Version::fromString("1.0"),

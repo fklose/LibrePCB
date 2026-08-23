@@ -21,6 +21,7 @@
  *  Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/transactionalfilesystem.h>
 #include <librepcb/core/geometry/polygon.h>
 #include <librepcb/core/project/board/board.h>
@@ -68,7 +69,7 @@ protected:
   std::unique_ptr<Project> createProject() const {
     std::unique_ptr<Project> project = Project::create(
         std::make_unique<TransactionalDirectory>(
-            TransactionalFileSystem::openRW(FilePath::getRandomTempPath())),
+            TransactionalFileSystem::openRW(Application::getRandomTempPath())),
         "project.lpp");
     project->setUuid(Uuid::fromString("7b3985b2-91ad-4e93-8d15-7668869ed45d"));
     project->setName(ElementName("New Project"));

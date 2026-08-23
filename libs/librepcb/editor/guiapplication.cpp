@@ -610,7 +610,7 @@ std::shared_ptr<ProjectEditor> GuiApplication::openProject(
     QString projectFileName = fp.getFilename();
     if (fp.getSuffix() == "lppz") {
       fs = TransactionalFileSystem::openRO(
-          FilePath::getRandomTempPath(),
+          Application::getRandomTempPath(),
           &TransactionalFileSystem::RestoreMode::no);
       fs->removeDirRecursively();  // 1) Get a clean initial state.
       fs->loadFromZip(fp);  // 2) Load files from ZIP.

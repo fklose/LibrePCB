@@ -214,28 +214,6 @@ FilePath FilePath::fromRelative(const FilePath& base,
   return FilePath(base.mFileInfo.filePath() % QLatin1Char('/') % relative);
 }
 
-FilePath FilePath::getTempPath() noexcept {
-  FilePath tmp(QDir::tempPath());
-
-  if (!tmp.isExistingDir())
-    qWarning() << "Could not determine the system's temporary directory!";
-
-  return tmp;
-}
-
-FilePath FilePath::getApplicationTempPath() noexcept {
-  return getTempPath().getPathTo("librepcb");
-}
-
-FilePath FilePath::getRandomTempPath() noexcept {
-  // Attention: This pattern is assumed by
-  // Application::cleanTemporaryDirectory() to detect the age of tmp files!
-  QString random = QString("%1_%2")
-                       .arg(QDateTime::currentMSecsSinceEpoch())
-                       .arg(QRandomGenerator::global()->generate());
-  return getApplicationTempPath().getPathTo(random);
-}
-
 QString FilePath::cleanFileName(const QString& userInput,
                                 CleanFileNameOptions options,
                                 int maxLength) noexcept {

@@ -21,6 +21,7 @@
  *  Includes
  ******************************************************************************/
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/fileio/transactionalfilesystem.h>
 #include <librepcb/core/library/sym/symbol.h>
@@ -53,7 +54,7 @@ public:
   qint64 mNewSymbolCreationSize;
 
   ProjectLibraryTest() {
-    mTempDir = FilePath::getRandomTempPath();
+    mTempDir = Application::getRandomTempPath();
     mLibDir = mTempDir.getPathTo("project library test");
     mTempFs = TransactionalFileSystem::openRW(mTempDir);
     mLibFs = TransactionalFileSystem::openRW(mLibDir);

@@ -20,10 +20,10 @@
 /*******************************************************************************
  *  Includes
  ******************************************************************************/
-
 #include "../../testhelpers.h"
 
 #include <gtest/gtest.h>
+#include <librepcb/core/application.h>
 #include <librepcb/core/fileio/fileutils.h>
 #include <librepcb/core/fileio/transactionaldirectory.h>
 #include <librepcb/core/fileio/transactionalfilesystem.h>
@@ -61,7 +61,7 @@ public:
   std::unique_ptr<WorkspaceLibraryDbWriter> mWriter;
   std::shared_ptr<TransactionalFileSystem> mFs;
 
-  AddComponentDialogTest() : mWsDir(FilePath::getRandomTempPath()) {
+  AddComponentDialogTest() : mWsDir(Application::getRandomTempPath()) {
     QSettings().clear();
     FileUtils::makePath(mWsDir);
     mWsDb = std::make_unique<WorkspaceLibraryDb>(mWsDir);

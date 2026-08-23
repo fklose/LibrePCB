@@ -44,7 +44,8 @@ namespace editor {
 
 BoardClipboardData::BoardClipboardData(const Uuid& boardUuid,
                                        const Point& cursorPos) noexcept
-  : mFileSystem(TransactionalFileSystem::openRW(FilePath::getRandomTempPath())),
+  : mFileSystem(
+        TransactionalFileSystem::openRW(Application::getRandomTempPath())),
     mBoardUuid(boardUuid),
     mCursorPos(cursorPos),
     mDevices(),
